@@ -1,4 +1,4 @@
-package com.company.config;
+package com.company.config.i18n;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import java.util.Locale;
 @Configuration
 public class ResourceBundleMessageSourceConfig {
     @Bean
-    public ResourceBundleMessageSource getMessageResource() {
+    public ResourceBundleMessageSource getMessage() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames("i18n/messages/message");
         messageSource.setDefaultEncoding("UTF-8");

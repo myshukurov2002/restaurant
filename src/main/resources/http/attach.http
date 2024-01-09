@@ -1,0 +1,30 @@
+###
+POST http://localhost:8080/api/v1/attach/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="Graduation letter3.docx"
+
+< C:\Users\shuku\IdeaProjects\WordToPdfxhXiao\WordToPdf\aspose\src\main\java\com\dong\aspose\Graduation letter3.docx
+
+###
+POST http://localhost:8080/api/v1/attach/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="IMG_3726.JPG"
+
+< C:\Users\shuku\Desktop\IMG_3726.JPG
+
+
+### get image by id
+GET http://localhost:8080/api/v1/attach/open/04b0823f-f096-42bb-873d-6c4ce2225068/img
+
+### get image by id general
+GET http://localhost:8080/api/v1/attach/open/04b0823f-f096-42bb-873d-6c4ce2225068/general
+
+###
+GET http://localhost:8080/api/v1/attach/download/04b0823f-f096-42bb-873d-6c4ce2225068d
+
+### delete
+DELETE http://localhost:8080/api/v1/attach/delete/c0c6848b-d6be-4cc6-8e71-46069b2fff28

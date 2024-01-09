@@ -1,0 +1,24 @@
+###  LOGIN
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "alijons@gmail.com",
+  "password": "123"
+}
+
+
+### REGISTRATION
+POST http://localhost:8080/api/v1/auth/registration
+Content-Type: application/json
+
+{
+  "firstName": "Quzivoy",
+  "secondName": "Buriyev",
+  "thirdName": "Sheraliyevich",
+  "email": "myshukurov@gmail.com",
+  "phone": "998902812344",
+  "password": "123",
+  "birthDate": "2023-11-25",
+  "nationality": "uzbek"
+}

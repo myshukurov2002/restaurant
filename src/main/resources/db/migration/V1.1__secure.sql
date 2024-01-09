@@ -24,7 +24,7 @@ WHERE NOT EXISTS(SELECT
 INSERT INTO profile_role
 (visibility, id, created_date, profile_id, role)
 SELECT
-    true, '2',now(), '1', 'ADMIN'
+    true, '2',now(), '1', 'USER'
 WHERE NOT EXISTS(SELECT
                  FROM profile_role
                  WHERE id = '2');
@@ -32,7 +32,7 @@ WHERE NOT EXISTS(SELECT
 INSERT INTO profile_role
 (visibility, id, created_date, profile_id, role)
 SELECT
-    true, '3',now(), '1', 'MIN_ADMIN'
+    true, '3',now(), '1', 'STAFF'
 WHERE NOT EXISTS(SELECT
                  FROM profile_role
                  WHERE id = '3');
@@ -40,7 +40,7 @@ WHERE NOT EXISTS(SELECT
 INSERT INTO profile_role
 (visibility, id, created_date, profile_id, role)
 SELECT
-    true, '4',now(), '1', 'STAFF'
+    true, '4',now(), '1', 'CHEF'
 WHERE NOT EXISTS(SELECT
                  FROM profile_role
                  WHERE id = '4');
@@ -48,7 +48,15 @@ WHERE NOT EXISTS(SELECT
 INSERT INTO profile_role
 (visibility, id, created_date, profile_id, role)
 SELECT
-    true, '5',now(), '1', 'USER'
+    true, '5',now(), '1', 'ADMINISTRATOR'
 WHERE NOT EXISTS(SELECT id
                  FROM profile_role
                  WHERE id = '5');
+
+INSERT INTO profile_role
+(visibility, id, created_date, profile_id, role)
+SELECT
+    true, '6',now(), '1', 'ADMINISTRATOR'
+WHERE NOT EXISTS(SELECT id
+                 FROM profile_role
+                 WHERE id = '6');
