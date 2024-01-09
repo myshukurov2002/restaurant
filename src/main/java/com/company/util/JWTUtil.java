@@ -23,7 +23,7 @@ public class JWTUtil {
         jwtBuilder.claim("roles", roles);
 
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
-        jwtBuilder.setIssuer("applicant PORTAL");
+        jwtBuilder.setIssuer("restaurant PORTAL");
         return jwtBuilder.compact();
     }
     public static JwtDTO decode(String token) {
@@ -52,7 +52,7 @@ public class JWTUtil {
 //        jwtBuilder.claim("id", profileId);
 //
 //        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (roleTokenLiveTime)));
-//        jwtBuilder.setIssuer("applicant PORTAL");
+//        jwtBuilder.setIssuer("restaurant PORTAL");
 //        return jwtBuilder.compact();
 //    }
 //
