@@ -37,7 +37,6 @@ public class SecurityConfig {
             "attaches/**",
             "/attaches/**",
             "/api/v1/attach/**",
-            "http://localhost:63342",
     };
 
    /* @Bean

@@ -26,12 +26,12 @@ public class SwaggerConfig {
         devServer.setDescription("SERVER URL 🌐📃ℹ️🔍🙂");
 
         Contact contact = new Contact();
-        contact.setEmail("www.petitione.uz");
-        contact.setName("BRAIN CODERS");
+        contact.setEmail("www.bezcoder.uz");
+        contact.setName("bezcoder");
         contact.setUrl("https://t.me/+QFSu2h6bo3RiNjEy 🌐");
 
         Info info = new Info()
-                .title("petitioner.com Management API")
+                .title("bezcoder.com Management API")
                 .version("1.0")
                 .contact(contact)
                 .description("This API exposes endpoints to manage tutorials.")
