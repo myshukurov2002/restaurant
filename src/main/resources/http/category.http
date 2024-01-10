@@ -1,0 +1,39 @@
+### Create category
+POST localhost:8080/api/v1/category/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+Content-Type: application/json
+
+{
+  "name": "salad"
+}
+
+
+### Update category
+PUT localhost:8080/api/v1/category/update/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+Content-Type: application/json
+
+{
+  "name": "Vali"
+}
+
+### Delete category
+DELETE localhost:8080/api/v1/category/delete/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+Content-Type: application/json
+
+{
+  "name": "Vali"
+}
+
+###Get category by id
+GET localhost:8080/api/v1/category/open/getById/1
+
+###Get all category
+GET localhost:8080/api/v1/category/open/getList
+
+###paging category
+GET localhost:8080/api/v1/category/open/paging
+
+
+

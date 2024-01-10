@@ -16,13 +16,14 @@ import javax.validation.Valid;
 public class AuthController {
     @Autowired
     private AuthService authService;
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<?>> login(@Valid @RequestBody AuthDTO auth,
                                                 @RequestParam(defaultValue = "en") Language lang) {
         return ResponseEntity.ok(authService.login(auth, lang));
     }
 
-    @PostMapping("registration")
+    @PostMapping("/registration")
     public ResponseEntity<ApiResponse<?>> registration(@Valid @RequestBody RegistrationDTO reg,
                                                        @RequestParam(defaultValue = "en") Language lang) {
         return ResponseEntity.ok(authService.registration(reg, lang));

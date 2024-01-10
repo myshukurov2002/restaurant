@@ -33,4 +33,11 @@ public class MenuEntity extends StringBaseEntity {
 
     @Column(name = "table_order_id")
     private Integer tableOrderId;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
+    private ProfileEntity profileEntity;
+
+    @Column(name = "owner_id")
+    private String ownerId;
 }

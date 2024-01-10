@@ -31,4 +31,6 @@ public class OrderEntity extends StringBaseEntity {
 
     @Column(name = "owner_id")
     private String profileId;
+
+
 }

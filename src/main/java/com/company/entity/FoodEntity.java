@@ -22,7 +22,7 @@ public class FoodEntity extends IntegerBaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
-    private CategoryFoodEntity categoryFoodEntity;
+    private CategoryEntity categoryEntity;
 
     @Column(name = "category_id")
     private Integer categoryId;
@@ -33,4 +33,11 @@ public class FoodEntity extends IntegerBaseEntity {
 
     @Column(name = "menu_id")
     private String menuId;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
+    private ProfileEntity profileEntity;
+
+    @Column(name = "owner_id")
+    private String ownerId;
 }
