@@ -1,8 +1,8 @@
 package com.company.controller;
 
 import com.company.dto.ApiResponse;
-import com.company.dto.TableOrderDTO;
-import com.company.service.TableOrderService;
+import com.company.dto.OrderDTO;
+import com.company.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,16 +15,16 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/table")
-public class TableOrderController {
+@RequestMapping("/api/v1/order")
+public class OrderController {
     @Autowired
-    private TableOrderService tableOrderService;
+    private OrderService orderService;
 
     @PostMapping("/create")
-    @Operation(summary = "create table ➕", description = "this api used for table creation")
+    @Operation(summary = "create  ➕", description = "this api used for order creation")
     @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
-    public ResponseEntity<ApiResponse<?>> create(@RequestBody TableOrderDTO dto) {
-        ApiResponse<?> response = tableOrderService.create(dto);
+    public ResponseEntity<ApiResponse<?>> create(@RequestBody OrderDTO dto) {
+        ApiResponse<?> response = orderService.create(dto);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -32,11 +32,11 @@ public class TableOrderController {
     }
 
     @PutMapping("/update/{id}")
-    @Operation(summary = "update table 🛠️", description = "this api used for table update")
+    @Operation(summary = "update  🛠️", description = "this api used for order  update")
     @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
-    public ResponseEntity<ApiResponse<?>> update(@PathVariable Integer id,
-                                                 @Valid @RequestBody TableOrderDTO dto) {
-        ApiResponse<?> response = tableOrderService.update(id, dto);
+    public ResponseEntity<ApiResponse<?>> update(@PathVariable String id,
+                                                 @Valid @RequestBody OrderDTO dto) {
+        ApiResponse<?> response = orderService.update(id, dto);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -44,10 +44,10 @@ public class TableOrderController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "delete table ❌", description = "this api used for table delete")
+    @Operation(summary = "delete  ❌", description = "this api used for order  delete")
     @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
-    public ResponseEntity<ApiResponse<?>> delete(@PathVariable Integer id) {
-        ApiResponse<?> response = tableOrderService.delete(id);
+    public ResponseEntity<ApiResponse<?>> delete(@PathVariable String id) {
+        ApiResponse<?> response = orderService.delete(id);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -55,9 +55,9 @@ public class TableOrderController {
     }
 
     @GetMapping("/open/getById/{id}")
-    @Operation(summary = "getById table 🎁", description = "this api used for table getById")
-    public ResponseEntity<ApiResponse<?>> getById(@PathVariable Integer id) {
-        ApiResponse<?> response = tableOrderService.getById(id);
+    @Operation(summary = "getById  📂", description = "this api used for order  getById")
+    public ResponseEntity<ApiResponse<?>> getById(@PathVariable String id) {
+        ApiResponse<?> response = orderService.getById(id);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -65,16 +65,16 @@ public class TableOrderController {
     }
 
     @GetMapping("/open/getList")
-    @Operation(summary = "getList table 📄🎁", description = "this api used for table getList")
+    @Operation(summary = "getList  📄📂", description = "this api used for order  getList")
     public ResponseEntity<List<?>> getList() {
-        return ResponseEntity.ok(tableOrderService.getList());
+        return ResponseEntity.ok(orderService.getList());
     }
 
 
     @GetMapping("/open/paging")
-    @Operation(summary = "paging table 📖🎁", description = "this api used for table paging")
+    @Operation(summary = "paging  📖📂", description = "this api used for order  paging")
     public ResponseEntity<Page<?>> paging(@RequestParam(defaultValue = "0") int page,
                                           @RequestParam(defaultValue = "20") int size) {
-        return ResponseEntity.ok(tableOrderService.paging(page, size));
+        return ResponseEntity.ok(orderService.paging(page, size));
     }
 }

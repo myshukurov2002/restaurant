@@ -1,0 +1,39 @@
+### Create order
+POST localhost:8080/api/v1/order/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+Content-Type: application/json
+
+{
+  "clientName": "Ali",
+  "phone": "213",
+  "price": 100000
+}
+
+
+### Update order
+PUT localhost:8080/api/v1/order/update/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+Content-Type: application/json
+
+{
+  "clientName": "Vali",
+  "phone": "111",
+  "price": 90000
+}
+
+### Delete order
+DELETE localhost:8080/api/v1/order/delete/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+
+
+###Get order by id
+GET localhost:8080/api/v1/order/open/getById/1
+
+###Get all order
+GET localhost:8080/api/v1/order/open/getList
+
+###paging order
+GET localhost:8080/api/v1/order/open/paging
+
+
+

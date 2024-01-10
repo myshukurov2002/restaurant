@@ -26,7 +26,7 @@ public class OrderEntity extends StringBaseEntity {
     private MenuEntity menuEntity;
 
     @Column(name = "order_date")
-    private Date date; // default now()
+    private Date date = new Date(); // default now()
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", insertable = false, updatable = false)

@@ -38,6 +38,7 @@ public class TableOrderServiceImpl implements TableOrderService {
         return dto;
     }
 
+    @Override
     public ApiResponse<?> create(TableOrderDTO dto) {
         TableOrderEntity entity = toEntity(dto);
         entity.setOwnerId(SecurityUtil.getCurrentProfileId());
@@ -48,6 +49,7 @@ public class TableOrderServiceImpl implements TableOrderService {
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.created", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }
 
+    @Override
     public ApiResponse<?> update(Integer id, TableOrderDTO dto) {
         Optional<TableOrderEntity> optionalTableOrder = tableOrderRepository.findById(id);
         if (optionalTableOrder.isEmpty()) {
@@ -62,6 +64,7 @@ public class TableOrderServiceImpl implements TableOrderService {
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.updated", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }
 
+    @Override
     public ApiResponse<?> delete(Integer id) {
         if (!tableOrderRepository.existsById(id)) {
             return new ApiResponse<>(false, resourceBundleService.getMessage("item.not.found", SecurityUtil.getProfileLanguage()));
@@ -72,6 +75,7 @@ public class TableOrderServiceImpl implements TableOrderService {
     }
 
 
+    @Override
     public ApiResponse<?> getById(Integer id) {
         Optional<TableOrderEntity> optionalTableOrder = tableOrderRepository.findById(id);
         if (optionalTableOrder.isEmpty()) {
@@ -81,6 +85,7 @@ public class TableOrderServiceImpl implements TableOrderService {
         return new ApiResponse<>(true, toDTO(entity));
     }
 
+    @Override
     public List<TableOrderDTO> getList() {
         List<TableOrderEntity> all = tableOrderRepository.findAll();
         return all
