@@ -23,4 +23,11 @@ public class TableOrderEntity extends IntegerBaseEntity {
     @Column(name = "table_status")
     @Enumerated(EnumType.STRING)
     private TableStatus tableStatus;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", insertable = false, updatable = false)
+    private ProfileEntity profileEntity;
+
+    @Column(name = "owner_id")
+    private String ownerId;
 }

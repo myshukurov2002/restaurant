@@ -33,5 +33,5 @@ public class OrderEntity extends StringBaseEntity {
     private ProfileEntity profileEntity;
 
     @Column(name = "owner_id")
-    private String profileId;
+    private String ownerId;
 }

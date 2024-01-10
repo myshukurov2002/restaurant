@@ -40,6 +40,8 @@ public class SecurityConfig {
             "/api/v1/attach/**",
             "/api/v1/category/open",
             "/api/v1/category/open/**",
+            "/api/v1/table/open",
+            "/api/v1/table/open/**",
     };
 
    /* @Bean

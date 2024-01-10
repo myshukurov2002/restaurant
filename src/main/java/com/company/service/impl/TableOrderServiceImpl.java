@@ -3,10 +3,10 @@ package com.company.service.impl;
 import com.company.config.i18n.ResourceBundleService;
 import com.company.config.security.details.SecurityUtil;
 import com.company.dto.ApiResponse;
-import com.company.dto.CategoryDTO;
-import com.company.entity.CategoryEntity;
-import com.company.repository.CategoryRepository;
-import com.company.service.CategoryService;
+import com.company.dto.TableOrderDTO;
+import com.company.entity.TableOrderEntity;
+import com.company.repository.TableOrderRepository;
+import com.company.service.TableOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -17,83 +17,84 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-public class CategoryServiceImpl implements CategoryService {
+public class TableOrderServiceImpl implements TableOrderService {
     @Autowired
-    private CategoryRepository categoryRepository;
+    private TableOrderRepository tableOrderRepository;
     @Autowired
     private ResourceBundleService resourceBundleService;
-    public CategoryEntity toEntity(CategoryDTO dto) {
-        CategoryEntity entity = new CategoryEntity();
-        entity.setName(dto.getName());
-        entity.setFoodEntities(dto.getFoodEntities());
+
+    public TableOrderEntity toEntity(TableOrderDTO dto) {
+
+        TableOrderEntity entity = new TableOrderEntity();
+        entity.setTableStatus(dto.getTableStatus());
+        entity.setTableType(dto.getTableType());
         return entity;
     }
-    public CategoryDTO toDTO(CategoryEntity entity) {
-        CategoryDTO dto = new CategoryDTO();
-        dto.setName(entity.getName());
-        dto.setFoodEntities(entity.getFoodEntities());
+
+    public TableOrderDTO toDTO(TableOrderEntity entity) {
+        TableOrderDTO dto = new TableOrderDTO();
+        dto.setTableType(entity.getTableType());
+        dto.setTableStatus(entity.getTableStatus());
         return dto;
     }
 
-    @Override
-    public ApiResponse<?> create(CategoryDTO dto) {
-        CategoryEntity entity = toEntity(dto);
+    public ApiResponse<?> create(TableOrderDTO dto) {
+        TableOrderEntity entity = toEntity(dto);
         entity.setOwnerId(SecurityUtil.getCurrentProfileId());
 
-        log.info("category created " + entity.getId());
+        log.info("tableOrder created " + entity.getId());
 
-        CategoryEntity saved = categoryRepository.save(entity);
+        TableOrderEntity saved = tableOrderRepository.save(entity);
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.created", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }
-    @Override
-    public ApiResponse<?> update(Integer id, CategoryDTO dto) {
-        Optional<CategoryEntity> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isEmpty()) {
+
+    public ApiResponse<?> update(Integer id, TableOrderDTO dto) {
+        Optional<TableOrderEntity> optionalTableOrder = tableOrderRepository.findById(id);
+        if (optionalTableOrder.isEmpty()) {
             return new ApiResponse<>(false, resourceBundleService.getMessage("item.not.found", SecurityUtil.getProfileLanguage()));
         }
-        CategoryEntity entity = optionalCategory.get();
-        entity.setName(dto.getName());
+        TableOrderEntity entity = optionalTableOrder.get();
+        entity.setTableStatus(dto.getTableStatus());
 
-        log.warn("category updated " + id);
+        log.warn("tableOrder updated " + id);
 
-        CategoryEntity saved = categoryRepository.save(entity);
+        TableOrderEntity saved = tableOrderRepository.save(entity);
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.updated", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }
-    @Override
+
     public ApiResponse<?> delete(Integer id) {
-        if (!categoryRepository.existsById(id)) {
+        if (!tableOrderRepository.existsById(id)) {
             return new ApiResponse<>(false, resourceBundleService.getMessage("item.not.found", SecurityUtil.getProfileLanguage()));
         }
-        categoryRepository.deleteById(id);
-        log.warn("category deleted " + id);
+        tableOrderRepository.deleteById(id);
+        log.warn("tableOrder deleted " + id);
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.deleted", SecurityUtil.getProfileLanguage()));
     }
-    @Override
+
+
     public ApiResponse<?> getById(Integer id) {
-        Optional<CategoryEntity> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isEmpty()) {
+        Optional<TableOrderEntity> optionalTableOrder = tableOrderRepository.findById(id);
+        if (optionalTableOrder.isEmpty()) {
             return new ApiResponse<>(false, resourceBundleService.getMessage("item.not.found", SecurityUtil.getProfileLanguage()));
         }
-        CategoryEntity entity = optionalCategory.get();
+        TableOrderEntity entity = optionalTableOrder.get();
         return new ApiResponse<>(true, toDTO(entity));
     }
 
-    @Override
-    public List<CategoryDTO> getList() {
-        List<CategoryEntity> all = categoryRepository.findAll();
+    public List<TableOrderDTO> getList() {
+        List<TableOrderEntity> all = tableOrderRepository.findAll();
         return all
                 .stream()
                 .map(this::toDTO)
                 .toList();
     }
 
-    @Override
-    public Page<CategoryDTO> paging(int page, int size) {
+    public Page<TableOrderDTO> paging(int page, int size) {
         Sort sort = Sort.by("createdDate").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<CategoryEntity> entities = categoryRepository.findAll(pageable);
-        List<CategoryDTO> dtos = entities
+        Page<TableOrderEntity> entities = tableOrderRepository.findAll(pageable);
+        List<TableOrderDTO> dtos = entities
                 .stream()
                 .map(this::toDTO)
                 .toList();
