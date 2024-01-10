@@ -1,39 +1,42 @@
-### Create order
-POST localhost:8080/api/v1/order/create
+### Create food
+POST localhost:8080/api/v1/food/create
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
 {
-  "clientName": "Ali",
-  "quantity": 1,
+  "name": "Olivye",
   "price": 100000,
+  "categoryId": 1
 }
 
 
-### Update order
-PUT localhost:8080/api/v1/order/update/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+### Update food
+PUT localhost:8080/api/v1/food/update/1
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
 {
-  "clientName": "Vali",
-  "phone": "111",
-  "price": 90000
+  "name": "Alivye",
+  "price": 100000,
+  "categoryId": 1
 }
 
-### Delete order
-DELETE localhost:8080/api/v1/order/delete/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+### Delete food
+DELETE localhost:8080/api/v1/food/delete/1
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 
 
-###Get order by id
-GET localhost:8080/api/v1/order/open/getById/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+###Get food by id
+GET localhost:8080/api/v1/food/open/getById/1
 
-###Get all order
-GET localhost:8080/api/v1/order/open/getList
+###Get all food
+GET localhost:8080/api/v1/food/open/getList
 
-###paging order
-GET localhost:8080/api/v1/order/open/paging
+###paging food
+GET localhost:8080/api/v1/food/open/paging
+
+###paging food by category id
+GET localhost:8080/api/v1/food/open/paging/by-categoryId/1
 
 
 

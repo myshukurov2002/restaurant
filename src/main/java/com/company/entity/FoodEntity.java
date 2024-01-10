@@ -15,7 +15,7 @@ public class FoodEntity extends IntegerBaseEntity {
     private String name;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private Integer quantity = 1;
 
     @Column(name = "price")
     private Double price;
