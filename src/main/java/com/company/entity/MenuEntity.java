@@ -14,20 +14,20 @@ import java.util.List;
 @Table(name = "menu")
 public class MenuEntity extends StringBaseEntity {
 
-    @OneToMany(mappedBy = "menuEntity", fetch = FetchType.EAGER)
-    List<FoodEntity> foodEntities;
+    @OneToMany(mappedBy = "orderFoodEntity", fetch = FetchType.EAGER)
+    private List<OrderFoodEntity> orderFoodEntities;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private MenuStatus menuStatus;
 
     @Column(name = "price")
-    private Double price;
+    private Double price = 0d;
 
     @OneToOne
     private OrderEntity orderEntity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_order_id", insertable = false, updatable = false)
     private TableOrderEntity tableOrderEntity;
 

@@ -27,12 +27,12 @@ public class FoodEntity extends IntegerBaseEntity {
     @Column(name = "category_id")
     private Integer categoryId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id", insertable = false, updatable = false)
-    private MenuEntity menuEntity;
-
-    @Column(name = "menu_id")
-    private String menuId;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "menu_id", insertable = false, updatable = false)
+//    private MenuEntity menuEntity;
+//
+//    @Column(name = "menu_id")
+//    private String menuId;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", insertable = false, updatable = false)

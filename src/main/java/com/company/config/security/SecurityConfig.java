@@ -42,6 +42,7 @@ public class SecurityConfig {
             "/api/v1/table/open/**",
             "/api/v1/order/open/**",
             "/api/v1/food/open/**",
+            "/api/v1/menu/open/**",
     };
 
    /* @Bean

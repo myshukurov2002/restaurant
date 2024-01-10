@@ -1,41 +1,36 @@
-### Create food
-POST localhost:8080/api/v1/food/create
+### Create menu
+POST localhost:8080/api/v1/menu/create
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
 {
-  "name": "Olivye",
-  "price": 100000,
-  "categoryId": 1
+  "menuType": 4,
+  "menuStatus": "EMPTY"
 }
 
 
-### Update food
-PUT localhost:8080/api/v1/food/update/1
+### Update menu
+PUT localhost:8080/api/v1/menu/update/1
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
 {
-  "name": "Alivye",
-  "price": 99900,
-  "categoryId": 1
+  "menuStatus": "BUSY"
 }
 
-### Delete food
-DELETE localhost:8080/api/v1/food/delete/1
+### Delete menu
+DELETE localhost:8080/api/v1/menu/delete/2
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 
-###Get food by id
-GET localhost:8080/api/v1/food/open/getById/1
 
-###Get all food
-GET localhost:8080/api/v1/food/open/getList
+###Get menu by id
+GET localhost:8080/api/v1/menu/open/getById/1
 
-###paging food
-GET localhost:8080/api/v1/food/open/paging
+###Get all menu
+GET localhost:8080/api/v1/menu/open/getList
 
-###paging food by category id
-GET localhost:8080/api/v1/food/open/paging/by-categoryId/1
+###paging menu
+GET localhost:8080/api/v1/menu/open/paging
 
 
 

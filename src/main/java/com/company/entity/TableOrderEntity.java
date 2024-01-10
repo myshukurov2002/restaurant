@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "table_order")
 public class TableOrderEntity extends IntegerBaseEntity {
 
-    @OneToMany(mappedBy = "tableOrderEntity")
+    @OneToMany(mappedBy = "tableOrderEntity", fetch = FetchType.EAGER)
     private List<MenuEntity> menuEntities;
 
     @Column(name = "table_type")// how many people can sit
