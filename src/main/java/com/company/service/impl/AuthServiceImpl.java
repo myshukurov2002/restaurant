@@ -4,6 +4,7 @@ import com.company.config.i18n.ResourceBundleService;
 import com.company.dto.ApiResponse;
 import com.company.dto.ProfileDTO;
 import com.company.dto.auth.AuthDTO;
+import com.company.dto.auth.JwtDTO;
 import com.company.dto.auth.RegistrationDTO;
 import com.company.entity.ProfileEntity;
 import com.company.entity.ProfileRoleEntity;
@@ -103,5 +104,21 @@ public class AuthServiceImpl implements AuthService {
         log.info("registration " + reg.getPhone());
 
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.registration", lang), toDTO(profileEntity));
+    }
+
+    @Override
+    public ApiResponse<?> updateById(String id, JwtDTO dto) {
+
+        if (!profileRepository.existsById(id) || dto == null) {
+            return new ApiResponse<>(false, resourceBundleService.getMessage("item.not.found", Language.en));
+        }
+        dto.getProfileRoles().forEach(r -> {
+            ProfileRoleEntity role = new ProfileRoleEntity();
+            role.setProfileRole(r);
+            role.setProfileId(id);
+            profileRoleRepository.save(role);
+        });
+        log.warn("update profile role, id: " + id);
+        return new ApiResponse<>(true, resourceBundleService.getMessage("success.registration", Language.en));
     }
 }

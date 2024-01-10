@@ -28,7 +28,8 @@ public class SecurityConfig {
     private JwtTokenFilter jwtTokenFilter;
 
     public static String[] AUTH_WHITELIST = {
-            "/api/v1/auth/**",
+            "/api/v1/auth/login",
+            "/api/v1/auth/registration",
             "/open/**",
             "/v3/api-docs",
             "/v3/api-docs/**",

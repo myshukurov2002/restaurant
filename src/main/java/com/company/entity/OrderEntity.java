@@ -16,6 +16,9 @@ public class OrderEntity extends StringBaseEntity {
     @Column(name = "client_name")
     private String clientName;
 
+    @Column(name = "client_phone")
+    private String phone;//TODO fot cashback
+
     @Column(name = "price")
     private Double price;
 
@@ -31,6 +34,4 @@ public class OrderEntity extends StringBaseEntity {
 
     @Column(name = "owner_id")
     private String profileId;
-
-
 }
