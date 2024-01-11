@@ -1,17 +1,18 @@
-### Create order
-POST localhost:8080/api/v1/order/create
+### Create check
+POST localhost:8080/api/v1/check/create/true
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
 {
   "clientName": "Ali",
   "quantity": 1,
-  "price": 100000,
+  "phone": "222",
+  "price": 400000
 }
 
 
-### Update order
-PUT localhost:8080/api/v1/order/update/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+### Update check
+PUT localhost:8080/api/v1/check/update/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
@@ -21,19 +22,19 @@ Content-Type: application/json
   "price": 90000
 }
 
-### Delete order
-DELETE localhost:8080/api/v1/order/delete/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+### Delete check
+DELETE localhost:8080/api/v1/check/delete/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 
 
-###Get order by id
-GET localhost:8080/api/v1/order/open/getById/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
+###Get check by id
+GET localhost:8080/api/v1/check/open/getById/a8bb1a27-ad58-45f1-9341-2a6c5f9daff0
 
-###Get all order
-GET localhost:8080/api/v1/order/open/getList
+###Get all check
+GET localhost:8080/api/v1/check/open/getList
 
-###paging order
-GET localhost:8080/api/v1/order/open/paging
+###paging check
+GET localhost:8080/api/v1/check/open/paging
 
 
 

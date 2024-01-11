@@ -3,9 +3,12 @@ package com.company.service.impl;
 import com.company.config.i18n.ResourceBundleService;
 import com.company.config.security.details.SecurityUtil;
 import com.company.dto.ApiResponse;
-import com.company.dto.OrderDTO;
+import com.company.dto.CheckDTO;
 import com.company.entity.CashbackEntity;
 import com.company.entity.CheckEntity;
+import com.company.entity.MenuEntity;
+import com.company.enums.MenuStatus;
+import com.company.re.MenuRepository;
 import com.company.repository.CashbackRepository;
 import com.company.repository.CheckRepository;
 import com.company.service.CheckService;
@@ -25,24 +28,26 @@ public class CheckServiceImpl implements CheckService {
     @Autowired
     private CashbackRepository cashbackRepository;
     @Autowired
+    private MenuRepository menuRepository;
     private ResourceBundleService resourceBundleService;
-    public CheckEntity toEntity(OrderDTO dto) {
+    public CheckEntity toEntity(CheckDTO dto) {
         CheckEntity entity = new CheckEntity();
         entity.setPrice(dto.getPrice());
         entity.setClientName(dto.getClientName());
         entity.setPhone(dto.getPhone());
         return entity;
     }
-    public OrderDTO toDTO(CheckEntity entity) {
-        OrderDTO dto = new OrderDTO();
+    public CheckDTO toDTO(CheckEntity entity) {
+        CheckDTO dto = new CheckDTO();
         dto.setPrice(entity.getPrice());
         dto.setClientName(entity.getClientName());
         dto.setPhone(entity.getPhone());
+        dto.setMenuEntity(entity.getMenuEntity());
         return dto;
     }
 
     @Override
-    public ApiResponse<?> create(OrderDTO dto) {
+    public ApiResponse<?> create(Boolean useCashback, CheckDTO dto) {
         CheckEntity entity = toEntity(dto);
         entity.setOwnerId(SecurityUtil.getCurrentProfileId());
 
@@ -50,17 +55,29 @@ public class CheckServiceImpl implements CheckService {
                 .findByPhone(dto.getPhone());
 
         CashbackEntity cashbackEntity = optionalCashback.orElseGet(CashbackEntity::new);
-        cashbackEntity.setPrice(cashbackEntity.getPrice() + dto.getPrice() * 0.1);
+        if (useCashback) {
+            entity.setPrice(dto.getPrice() - cashbackEntity.getPrice());
+            cashbackEntity.setPrice(0.0);
+        }
+        cashbackEntity.setPrice(cashbackEntity.getPrice() + dto.getPrice() * 0.05); // given  5% chasback
+        cashbackEntity.setPhone(dto.getPhone());
         cashbackRepository.save(cashbackEntity);
 
         log.info("order created " + entity.getId());
 
         CheckEntity saved = checkRepository.save(entity);
+
+        MenuEntity menu = menuRepository.getById(saved.getMenuEntity().getId());
+        menu.setMenuStatus(MenuStatus.DONE);
+        menuRepository.save(menu);
+
+
+
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.created", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }
 
     @Override
-    public ApiResponse<?> update(String id, OrderDTO dto) {
+    public ApiResponse<?> update(String id, CheckDTO dto) {
         Optional<CheckEntity> optionalOrder = checkRepository.findById(id);
         if (optionalOrder.isEmpty()) {
             return new ApiResponse<>(false, resourceBundleService.getMessage("item.not.found", SecurityUtil.getProfileLanguage()));
@@ -97,7 +114,7 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public List<OrderDTO> getList() {
+    public List<CheckDTO> getList() {
         List<CheckEntity> all = checkRepository.findAll();
         return all
                 .stream()
@@ -106,12 +123,12 @@ public class CheckServiceImpl implements CheckService {
     }
 
     @Override
-    public Page<OrderDTO> paging(int page, int size) {
+    public Page<CheckDTO> paging(int page, int size) {
         Sort sort = Sort.by("createdDate").descending();
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<CheckEntity> entities = checkRepository.findAll(pageable);
-        List<OrderDTO> dtos = entities
+        List<CheckDTO> dtos = entities
                 .stream()
                 .map(this::toDTO)
                 .toList();

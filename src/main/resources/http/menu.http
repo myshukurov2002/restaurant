@@ -4,19 +4,44 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsI
 Content-Type: application/json
 
 {
-  "menuType": 4,
-  "menuStatus": "EMPTY"
+  "orderFoodEntities": [
+    {
+      "foodId": 1
+    },
+    {
+      "foodId": 1
+    },
+    {
+      "foodId": 2
+    },
+    {
+      "foodId": 3
+    }
+  ],
+  "tableOrderId": 2
 }
 
 
 ### Update menu
-PUT localhost:8080/api/v1/menu/update/1
+PUT localhost:8080/api/v1/menu/update/80d8b4ce-ea51-44d5-b0b1-e185ce013eea
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 
 {
-  "menuStatus": "BUSY"
+  "menuStatus": "ACCEPTED"
 }
+###CREATED, SENT, ACCEPTED, PREPARING, DELIVERED, CANCELED, DONE, EATEN
+###
+
+### Update menu
+PUT localhost:8080/api/v1/menu/update/80d8b4ce-ea51-44d5-b0b1-e185ce013eea
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
+Content-Type: application/json
+
+{
+  "menuStatus": "EATEN"
+}
+
 
 ### Delete menu
 DELETE localhost:8080/api/v1/menu/delete/2
@@ -24,7 +49,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsI
 
 
 ###Get menu by id
-GET localhost:8080/api/v1/menu/open/getById/1
+GET localhost:8080/api/v1/menu/open/getById/80d8b4ce-ea51-44d5-b0b1-e185ce013eea
 
 ###Get all menu
 GET localhost:8080/api/v1/menu/open/getList

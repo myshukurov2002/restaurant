@@ -22,8 +22,12 @@ public class CheckEntity extends StringBaseEntity {
     @Column(name = "price")
     private Double price;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "menu_id", insertable = false, updatable = false)
     private MenuEntity menuEntity;
+
+    @Column(name = "menu_id")
+    private String menuId;
 
     @Column(name = "order_date")
     private Date date = new Date(); // default now()

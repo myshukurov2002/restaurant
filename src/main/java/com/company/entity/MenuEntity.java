@@ -19,13 +19,13 @@ public class MenuEntity extends StringBaseEntity {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private MenuStatus menuStatus;
+    private MenuStatus menuStatus = MenuStatus.CREATED;
 
     @Column(name = "price")
     private Double price = 0d;
 
-    @OneToOne(mappedBy = "menuEntity")
-    private CheckEntity checkEntity;
+    @OneToMany(mappedBy = "menuEntity")
+    private List<CheckEntity> checkEntities;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", insertable = false, updatable = false)

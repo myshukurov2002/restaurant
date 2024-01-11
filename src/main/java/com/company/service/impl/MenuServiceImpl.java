@@ -4,14 +4,17 @@ import com.company.config.i18n.ResourceBundleService;
 import com.company.config.security.details.SecurityUtil;
 import com.company.dto.ApiResponse;
 import com.company.dto.MenuDTO;
+import com.company.entity.FoodEntity;
 import com.company.entity.MenuEntity;
 import com.company.entity.OrderFoodEntity;
 import com.company.entity.TableOrderEntity;
 import com.company.enums.MenuStatus;
 import com.company.enums.TableStatus;
 import com.company.exp.AppBadRequestException;
+import com.company.re.FoodRepository;
 import com.company.re.MenuRepository;
 import com.company.repository.TableOrderRepository;
+import com.company.service.CheckService;
 import com.company.service.MenuService;
 import com.company.service.OrderFoodRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @Slf4j
-public class MenServiceImpl implements MenuService {
+public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuRepository menuRepository;
     @Autowired
@@ -33,11 +36,23 @@ public class MenServiceImpl implements MenuService {
     @Autowired
     private OrderFoodRepository orderFoodRepository;
     @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
     private ResourceBundleService resourceBundleService;
 
-    public MenuEntity toEntity(MenuDTO dto) {
+    public MenuDTO toDTO(MenuEntity entity) {
+        MenuDTO dto = new MenuDTO();
+        dto.setMenuStatus(entity.getMenuStatus());
+        dto.setTableOrderId(entity.getTableOrderId());
+        dto.setMenuStatus(entity.getMenuStatus());
+        dto.setPrice(entity.getPrice());
+        return dto;
+    }
+
+    @Override
+    public ApiResponse<?> create(MenuDTO dto) {
         MenuEntity entity = new MenuEntity();
-        entity.setMenuStatus(dto.getMenuStatus());
+        entity.setOwnerId(SecurityUtil.getCurrentProfileId());
 
         if (tableOrderRepository.existsById(dto.getTableOrderId())) {
             TableOrderEntity tableOrder = tableOrderRepository
@@ -54,39 +69,28 @@ public class MenServiceImpl implements MenuService {
 
         entity.setTableOrderId(dto.getTableOrderId());
         entity.setMenuStatus(MenuStatus.SENT);
+        MenuEntity saved = menuRepository.save(entity);
 
         AtomicReference<Double> sum = new AtomicReference<>(0d);
         List<OrderFoodEntity> orderFoodEntities = dto.getOrderFoodEntities();
         orderFoodEntities.forEach(o -> {
             OrderFoodEntity ofe = new OrderFoodEntity();
+            Optional<FoodEntity> optionalFood = foodRepository.findById(o.getFoodId());
+            if (optionalFood.isEmpty()) {
+                throw new AppBadRequestException("FOOD NOT FOUND !!!");
+            }
+            FoodEntity foodEntity = optionalFood.get();
             ofe.setFoodId(o.getFoodId());
-            ofe.setMenuId(o.getMenuId());
-            ofe.setPrice(o.getPrice());
-            sum.updateAndGet(v -> v + ofe.getPrice());
+            ofe.setMenuId(entity.getId());
+            ofe.setPrice(foodEntity.getPrice());
+            sum.updateAndGet(v -> v + foodEntity.getPrice());
             orderFoodRepository.save(ofe);
         });
-        entity.setPrice(sum.get());
-
-        return entity;
-    }
-
-    public MenuDTO toDTO(MenuEntity entity) {
-        MenuDTO dto = new MenuDTO();
-        dto.setMenuStatus(entity.getMenuStatus());
-        dto.setTableOrderId(entity.getTableOrderId());
-        dto.setMenuStatus(entity.getMenuStatus());
-        dto.setPrice(entity.getPrice());
-        return dto;
-    }
-
-    @Override
-    public ApiResponse<?> create(MenuDTO dto) {
-        MenuEntity entity = toEntity(dto);
-        entity.setOwnerId(SecurityUtil.getCurrentProfileId());
+        saved.setPrice(sum.get());
+        menuRepository.save(saved);
 
         log.info("menu created " + entity.getId());
 
-        MenuEntity saved = menuRepository.save(entity);
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.created", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }
 
@@ -98,17 +102,16 @@ public class MenServiceImpl implements MenuService {
         }
         MenuEntity entity = optionalMenu.get();
         entity.setMenuStatus(dto.getMenuStatus());
-        entity.setPrice(dto.getPrice());
 
-        if (dto.getMenuStatus().equals(MenuStatus.EATEN)) {
+        if (dto.getMenuStatus().equals(MenuStatus.EATEN) ||
+            dto.getMenuStatus().equals(MenuStatus.CANCELED)) {
             Optional<TableOrderEntity> optionalTable = tableOrderRepository
-                    .findById(dto.getTableOrderId());
-            if (optionalMenu.isEmpty()) {
-                throw new AppBadRequestException("ITEM NOT FOUND !!!");
-            }
+                    .findById(entity.getTableOrderId());
+
             TableOrderEntity tableOrder = optionalTable.get();
             tableOrder.setTableStatus(TableStatus.EMPTY);
             tableOrderRepository.save(tableOrder);
+
         }
 
         log.warn("menu updated " + id);

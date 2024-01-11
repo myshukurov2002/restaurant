@@ -16,7 +16,7 @@ public class FoodEntity extends IntegerBaseEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", columnDefinition = "int default 1")
     private Integer quantity = 1;
 
     @Column(name = "price")

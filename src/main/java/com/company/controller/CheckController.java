@@ -1,7 +1,7 @@
 package com.company.controller;
 
 import com.company.dto.ApiResponse;
-import com.company.dto.OrderDTO;
+import com.company.dto.CheckDTO;
 import com.company.service.CheckService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,17 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/order")
+@RequestMapping("/api/v1/check")
 public class CheckController {
     @Autowired
     private CheckService checkService;
 
-    @PostMapping("/create")
+    @PostMapping("/create/{useCashback}")
     @Operation(summary = "create  ➕", description = "this api used for order creation")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
-    public ResponseEntity<ApiResponse<?>> create(@RequestBody OrderDTO dto) {
-        ApiResponse<?> response = checkService.create(dto);
+    @PreAuthorize("hasAnyRole('STAFF', 'WAITER', 'ADMINISTRATOR', 'SUPER_ADMIN')")
+    public ResponseEntity<ApiResponse<?>> create(@PathVariable Boolean useCashback,
+                                                 @RequestBody CheckDTO dto) {
+        ApiResponse<?> response = checkService.create(useCashback,dto);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -33,9 +34,9 @@ public class CheckController {
 
     @PutMapping("/update/{id}")
     @Operation(summary = "update  🛠️", description = "this api used for order  update")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF', 'WAITER', 'ADMINISTRATOR', 'SUPER_ADMIN')")
     public ResponseEntity<ApiResponse<?>> update(@PathVariable String id,
-                                                 @Valid @RequestBody OrderDTO dto) {
+                                                 @Valid @RequestBody CheckDTO dto) {
         ApiResponse<?> response = checkService.update(id, dto);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
@@ -45,7 +46,7 @@ public class CheckController {
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "delete  ❌", description = "this api used for order  delete")
-    @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('STAFF', 'WAITER', 'ADMINISTRATOR', 'SUPER_ADMIN')")
     public ResponseEntity<ApiResponse<?>> delete(@PathVariable String id) {
         ApiResponse<?> response = checkService.delete(id);
         if (response.getStatus()) {
@@ -55,7 +56,7 @@ public class CheckController {
     }
 
     @GetMapping("/open/getById/{id}")
-    @Operation(summary = "getById  📂", description = "this api used for order  getById")
+    @Operation(summary = "getById  🤑", description = "this api used for order  getById")
     public ResponseEntity<ApiResponse<?>> getById(@PathVariable String id) {
         ApiResponse<?> response = checkService.getById(id);
         if (response.getStatus()) {
@@ -65,14 +66,14 @@ public class CheckController {
     }
 
     @GetMapping("/open/getList")
-    @Operation(summary = "getList  📄📂", description = "this api used for order  getList")
+    @Operation(summary = "getList  📄🤑", description = "this api used for order  getList")
     public ResponseEntity<List<?>> getList() {
         return ResponseEntity.ok(checkService.getList());
     }
 
 
     @GetMapping("/open/paging")
-    @Operation(summary = "paging  📖📂", description = "this api used for order  paging")
+    @Operation(summary = "paging  📖🤑", description = "this api used for order  paging")
     public ResponseEntity<Page<?>> paging(@RequestParam(defaultValue = "0") int page,
                                           @RequestParam(defaultValue = "20") int size) {
         return ResponseEntity.ok(checkService.paging(page, size));

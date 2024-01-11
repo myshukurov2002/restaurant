@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OrderDTO {
+public class CheckDTO {
     private String clientName;
     private String phone;
     private Double price;
