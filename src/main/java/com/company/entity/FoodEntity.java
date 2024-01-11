@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -20,19 +22,15 @@ public class FoodEntity extends IntegerBaseEntity {
     @Column(name = "price")
     private Double price;
 
+    @OneToMany(mappedBy = "foodEntity")
+    private List<OrderFoodEntity> orderFoodEntityList;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity categoryEntity;
 
     @Column(name = "category_id")
     private Integer categoryId;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "menu_id", insertable = false, updatable = false)
-//    private MenuEntity menuEntity;
-//
-//    @Column(name = "menu_id")
-//    private String menuId;
 
     @ManyToOne
     @JoinColumn(name = "owner_id", insertable = false, updatable = false)

@@ -100,6 +100,17 @@ public class MenServiceImpl implements MenuService {
         entity.setMenuStatus(dto.getMenuStatus());
         entity.setPrice(dto.getPrice());
 
+        if (dto.getMenuStatus().equals(MenuStatus.EATEN)) {
+            Optional<TableOrderEntity> optionalTable = tableOrderRepository
+                    .findById(dto.getTableOrderId());
+            if (optionalMenu.isEmpty()) {
+                throw new AppBadRequestException("ITEM NOT FOUND !!!");
+            }
+            TableOrderEntity tableOrder = optionalTable.get();
+            tableOrder.setTableStatus(TableStatus.EMPTY);
+            tableOrderRepository.save(tableOrder);
+        }
+
         log.warn("menu updated " + id);
 
         MenuEntity saved = menuRepository.save(entity);

@@ -10,19 +10,19 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-@Table(name = "order_item")
-public class OrderEntity extends StringBaseEntity {
+@Table(name = "check_item")
+public class CheckEntity extends StringBaseEntity {
 
     @Column(name = "client_name")
     private String clientName;
 
     @Column(name = "client_phone")
-    private String phone;//TODO fot cashback
+    private String phone;//TODO for cashback
 
     @Column(name = "price")
     private Double price;
 
-    @OneToOne(mappedBy = "orderEntity", fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     private MenuEntity menuEntity;
 
     @Column(name = "order_date")

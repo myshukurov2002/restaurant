@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-public interface OrderService {
+public interface CheckService {
     ApiResponse<?> create(OrderDTO dto);
 
     ApiResponse<?> update(String id, OrderDTO dto);

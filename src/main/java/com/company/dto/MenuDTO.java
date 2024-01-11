@@ -1,6 +1,6 @@
 package com.company.dto;
 
-import com.company.entity.OrderEntity;
+import com.company.entity.CheckEntity;
 import com.company.entity.OrderFoodEntity;
 import com.company.entity.ProfileEntity;
 import com.company.entity.TableOrderEntity;
@@ -18,7 +18,7 @@ public class MenuDTO {
     private List<OrderFoodEntity> orderFoodEntities;
     private MenuStatus menuStatus;
     private Double price;
-    private OrderEntity orderEntity;
+    private CheckEntity checkEntity;
     private TableOrderEntity tableOrderEntity;
     private Integer tableOrderId;
     private ProfileEntity profileEntity;

@@ -2,7 +2,7 @@ package com.company.controller;
 
 import com.company.dto.ApiResponse;
 import com.company.dto.OrderDTO;
-import com.company.service.OrderService;
+import com.company.service.CheckService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,15 +16,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/order")
-public class OrderController {
+public class CheckController {
     @Autowired
-    private OrderService orderService;
+    private CheckService checkService;
 
     @PostMapping("/create")
     @Operation(summary = "create  ➕", description = "this api used for order creation")
     @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
     public ResponseEntity<ApiResponse<?>> create(@RequestBody OrderDTO dto) {
-        ApiResponse<?> response = orderService.create(dto);
+        ApiResponse<?> response = checkService.create(dto);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -36,7 +36,7 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
     public ResponseEntity<ApiResponse<?>> update(@PathVariable String id,
                                                  @Valid @RequestBody OrderDTO dto) {
-        ApiResponse<?> response = orderService.update(id, dto);
+        ApiResponse<?> response = checkService.update(id, dto);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -47,7 +47,7 @@ public class OrderController {
     @Operation(summary = "delete  ❌", description = "this api used for order  delete")
     @PreAuthorize("hasAnyRole('ADMINISTRATOR', 'SUPER_ADMIN')")
     public ResponseEntity<ApiResponse<?>> delete(@PathVariable String id) {
-        ApiResponse<?> response = orderService.delete(id);
+        ApiResponse<?> response = checkService.delete(id);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -57,7 +57,7 @@ public class OrderController {
     @GetMapping("/open/getById/{id}")
     @Operation(summary = "getById  📂", description = "this api used for order  getById")
     public ResponseEntity<ApiResponse<?>> getById(@PathVariable String id) {
-        ApiResponse<?> response = orderService.getById(id);
+        ApiResponse<?> response = checkService.getById(id);
         if (response.getStatus()) {
             return ResponseEntity.ok(response);
         }
@@ -67,7 +67,7 @@ public class OrderController {
     @GetMapping("/open/getList")
     @Operation(summary = "getList  📄📂", description = "this api used for order  getList")
     public ResponseEntity<List<?>> getList() {
-        return ResponseEntity.ok(orderService.getList());
+        return ResponseEntity.ok(checkService.getList());
     }
 
 
@@ -75,6 +75,6 @@ public class OrderController {
     @Operation(summary = "paging  📖📂", description = "this api used for order  paging")
     public ResponseEntity<Page<?>> paging(@RequestParam(defaultValue = "0") int page,
                                           @RequestParam(defaultValue = "20") int size) {
-        return ResponseEntity.ok(orderService.paging(page, size));
+        return ResponseEntity.ok(checkService.paging(page, size));
     }
 }
