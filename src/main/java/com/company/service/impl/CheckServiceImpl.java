@@ -29,6 +29,7 @@ public class CheckServiceImpl implements CheckService {
     private CashbackRepository cashbackRepository;
     @Autowired
     private MenuRepository menuRepository;
+    @Autowired
     private ResourceBundleService resourceBundleService;
     public CheckEntity toEntity(CheckDTO dto) {
         CheckEntity entity = new CheckEntity();
@@ -66,10 +67,10 @@ public class CheckServiceImpl implements CheckService {
         log.info("order created " + entity.getId());
 
         CheckEntity saved = checkRepository.save(entity);
-
-        MenuEntity menu = menuRepository.getById(saved.getMenuEntity().getId());
-        menu.setMenuStatus(MenuStatus.DONE);
-        menuRepository.save(menu);
+//
+//        MenuEntity menu = menuRepository.getById(saved.getMenuEntity().getId());
+//        menu.setMenuStatus(MenuStatus.DONE);
+//        menuRepository.save(menu);
 
 
 

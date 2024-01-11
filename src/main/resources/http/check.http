@@ -5,7 +5,6 @@ Content-Type: application/json
 
 {
   "clientName": "Ali",
-  "quantity": 1,
   "phone": "222",
   "price": 400000
 }
