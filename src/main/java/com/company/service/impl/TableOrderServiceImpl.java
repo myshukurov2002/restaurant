@@ -37,7 +37,6 @@ public class TableOrderServiceImpl implements TableOrderService {
         dto.setTableStatus(entity.getTableStatus());
         return dto;
     }
-
     @Override
     public ApiResponse<?> create(TableOrderDTO dto) {
         TableOrderEntity entity = toEntity(dto);
@@ -73,7 +72,6 @@ public class TableOrderServiceImpl implements TableOrderService {
         log.warn("tableOrder deleted " + id);
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.deleted", SecurityUtil.getProfileLanguage()));
     }
-
 
     @Override
     public ApiResponse<?> getById(Integer id) {

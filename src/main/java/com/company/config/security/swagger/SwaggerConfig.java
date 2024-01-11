@@ -28,7 +28,7 @@ public class SwaggerConfig {
         Contact contact = new Contact();
         contact.setEmail("www.bezcoder.uz");
         contact.setName("bezcoder");
-        contact.setUrl("https://t.me/+QFSu2h6bo3RiNjEy 🌐");
+        contact.setUrl("https://t.me/bezkoder 🌐");
 
         Info info = new Info()
                 .title("bezcoder.com Management API")

@@ -22,7 +22,6 @@ public class FoodServiceImpl implements FoodService {
     private FoodRepository foodRepository;
     @Autowired
     private ResourceBundleService resourceBundleService;
-
     private FoodEntity toEntity(FoodDTO dto) {
         FoodEntity entity = new FoodEntity();
         entity.setName(dto.getName());
@@ -31,7 +30,6 @@ public class FoodServiceImpl implements FoodService {
         entity.setQuantity(dto.getQuantity());
         return entity;
     }
-
     private FoodDTO toDTO(FoodEntity entity) {
         FoodDTO dto = new FoodDTO();
         dto.setName(entity.getName());

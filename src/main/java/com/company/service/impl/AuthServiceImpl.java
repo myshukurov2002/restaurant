@@ -47,7 +47,6 @@ public class AuthServiceImpl implements AuthService {
 
         List<ProfileRole> roleList = profileRoleRepository.findAllRoleList(entity.getId());
 
-//        dto.setRoles(roleList);//TODO remove
         dto.setJwt(JWTUtil.encode(entity.getId(), roleList));
         return dto;
     }

@@ -28,35 +28,14 @@ public class ControllerExceptionHandler {
         return ResponseEntity.ok(new ApiResponse<>(exp.getMessage(), 405, true));
     }
 
-//    @ExceptionHandler(UnAuthorizedException.class)
-//    public ResponseEntity<String> handler(UnAuthorizedException e) {
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
-//    }
-//
-//    @ExceptionHandler(AppMethodNotAllowedException.class)
-//    public ResponseEntity<String> handler(AppMethodNotAllowedException e) {
-//        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(e.getMessage());
-//    }
-
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ApiResponse<?>> handler(AccessDeniedException e) {
         return ResponseEntity.ok(new ApiResponse<>(e.getMessage(), HttpStatus.METHOD_NOT_ALLOWED.value(), true));
     }
-
-//    @ExceptionHandler(SmsLimitOverException.class)
-//    public ResponseEntity<ApiResponse<?>> handler(SmsLimitOverException e) {
-//        return ResponseEntity.ok(new ApiResponse<>(e.getMessage(), HttpStatus.METHOD_NOT_ALLOWED.value(), true));
-//    }
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<?> handlerException(RuntimeException e) {
         e.printStackTrace();
         return ResponseEntity.ok(new ApiResponse<>(e.getMessage(), 500, true));
     }
-//    @ExceptionHandler(MaxUploadSizeExceededException.class)
-//    public ResponseEntity<String> handleMaxSizeException(MaxUploadSizeExceededException exc) {
-//        return ResponseEntity.ok(HttpStatus.EXPECTATION_FAILED).body("File size exceeds the allowed limit.");
-//    }
-
-
 }

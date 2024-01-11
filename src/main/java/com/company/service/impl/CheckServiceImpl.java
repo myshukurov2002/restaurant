@@ -41,7 +41,6 @@ public class CheckServiceImpl implements CheckService {
         dto.setPrice(entity.getPrice());
         dto.setClientName(entity.getClientName());
         dto.setPhone(entity.getPhone());
-//        dto.setMenuEntity(entity.getMenuEntity());
         return dto;
     }
 
@@ -65,12 +64,6 @@ public class CheckServiceImpl implements CheckService {
         log.info("order created " + entity.getId());
 
         CheckEntity saved = checkRepository.save(entity);
-//
-//        MenuEntity menu = menuRepository.getById(saved.getMenuEntity().getId());
-//        menu.setMenuStatus(MenuStatus.DONE);
-//        menuRepository.save(menu);
-
-
 
         return new ApiResponse<>(true, resourceBundleService.getMessage("success.created", SecurityUtil.getProfileLanguage()), toDTO(saved));
     }

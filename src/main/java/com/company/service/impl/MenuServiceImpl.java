@@ -65,7 +65,6 @@ public class MenuServiceImpl implements MenuService {
             }
         }
 
-
         entity.setTableOrderId(dto.getTableOrderId());
         entity.setMenuStatus(MenuStatus.SENT);
         MenuEntity saved = menuRepository.save(entity);

@@ -10,15 +10,10 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -45,38 +40,13 @@ public class SecurityConfig {
             "/api/v1/menu/open/**",
     };
 
-   /* @Bean
-    public AuthenticationProvider authenticationProvider() {
-        // authentication (login,password)
-        String password = UUID.randomUUID().toString();
-        System.out.println("User Password mazgi: " + password);
-
-        UserDetails user = User.builder()
-                .username("user")
-                .password("{noop}" + password) // here we have a lot of types, like bycrif
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password("{noop}" + "12345") // here we have a lot of types, like bycrif
-                .roles("ADMIN")
-                .build();
-
-        final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(new InMemoryUserDetailsManager(user, admin));
-        return authenticationProvider;
-    }*/
-
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        // authentication (login,password)
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
-//        authenticationProvider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
@@ -97,40 +67,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // authorization (ROLE)
         http.authorizeHttpRequests((c) ->
-                        c.requestMatchers(AUTH_WHITELIST).permitAll()
-//                        .requestMatchers("/api/v1/attach/admin/**").hasAnyRole("ADMIN")
-//                        .requestMatchers("/api/v1/attach/**").permitAll()
-//                        .requestMatchers("/api/v1/profile/**").permitAll()
-//                        .requestMatchers("/api/v1/tag/**").hasAnyRole("ADMIN")//TODO
-//                        .requestMatchers("/api/v1/profile/admin/**").hasRole("ADMIN")
-//                        .requestMatchers("/api/v1/profile/**").permitAll()
-                                .anyRequest().authenticated()
+                c.requestMatchers(AUTH_WHITELIST).permitAll()
+                        .anyRequest().authenticated()
         ).addFilterAfter(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(httpSecurityCorsConfigurer -> {
-            CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(Arrays.asList("*"));
-            configuration.setAllowedMethods(Arrays.asList("*"));
-            configuration.setAllowedHeaders(Arrays.asList("*"));
-
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration);
-            httpSecurityCorsConfigurer.configurationSource(source);
-        });
 
         return http.build();
     }
-
-    /*@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**");
-            }
-        };
-    }*/
 }
