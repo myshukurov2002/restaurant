@@ -22,13 +22,13 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
     @Autowired
     private ResourceBundleService resourceBundleService;
-    public CategoryEntity toEntity(CategoryDTO dto) {
+    private CategoryEntity toEntity(CategoryDTO dto) {
         CategoryEntity entity = new CategoryEntity();
         entity.setName(dto.getName());
         entity.setFoodEntities(dto.getFoodEntities());
         return entity;
     }
-    public CategoryDTO toDTO(CategoryEntity entity) {
+    private CategoryDTO toDTO(CategoryEntity entity) {
         CategoryDTO dto = new CategoryDTO();
         dto.setName(entity.getName());
         dto.setFoodEntities(entity.getFoodEntities());

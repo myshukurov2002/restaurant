@@ -24,8 +24,8 @@ public class MenuEntity extends StringBaseEntity {
     @Column(name = "price")
     private Double price = 0d;
 
-    @OneToMany(mappedBy = "menuEntity")
-    private List<CheckEntity> checkEntities;
+//    @OneToMany(mappedBy = "menuEntity")
+//    private List<CheckEntity> checkEntities;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", insertable = false, updatable = false)

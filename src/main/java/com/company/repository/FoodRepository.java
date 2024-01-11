@@ -1,4 +1,4 @@
-package com.company.re;
+package com.company.repository;
 
 import com.company.entity.FoodEntity;
 import org.springframework.data.domain.Page;

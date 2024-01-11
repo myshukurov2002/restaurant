@@ -1,4 +1,4 @@
-package com.company.re;
+package com.company.repository;
 
 import com.company.entity.MenuEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -23,7 +23,7 @@ public class TableOrderServiceImpl implements TableOrderService {
     @Autowired
     private ResourceBundleService resourceBundleService;
 
-    public TableOrderEntity toEntity(TableOrderDTO dto) {
+    private TableOrderEntity toEntity(TableOrderDTO dto) {
 
         TableOrderEntity entity = new TableOrderEntity();
         entity.setTableStatus(dto.getTableStatus());
@@ -31,7 +31,7 @@ public class TableOrderServiceImpl implements TableOrderService {
         return entity;
     }
 
-    public TableOrderDTO toDTO(TableOrderEntity entity) {
+    private TableOrderDTO toDTO(TableOrderEntity entity) {
         TableOrderDTO dto = new TableOrderDTO();
         dto.setTableType(entity.getTableType());
         dto.setTableStatus(entity.getTableStatus());

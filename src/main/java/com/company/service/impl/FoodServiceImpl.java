@@ -5,7 +5,7 @@ import com.company.config.security.details.SecurityUtil;
 import com.company.dto.ApiResponse;
 import com.company.dto.FoodDTO;
 import com.company.entity.FoodEntity;
-import com.company.re.FoodRepository;
+import com.company.repository.FoodRepository;
 import com.company.service.FoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class FoodServiceImpl implements FoodService {
     @Autowired
     private ResourceBundleService resourceBundleService;
 
-    public FoodEntity toEntity(FoodDTO dto) {
+    private FoodEntity toEntity(FoodDTO dto) {
         FoodEntity entity = new FoodEntity();
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
@@ -32,7 +32,7 @@ public class FoodServiceImpl implements FoodService {
         return entity;
     }
 
-    public FoodDTO toDTO(FoodEntity entity) {
+    private FoodDTO toDTO(FoodEntity entity) {
         FoodDTO dto = new FoodDTO();
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());

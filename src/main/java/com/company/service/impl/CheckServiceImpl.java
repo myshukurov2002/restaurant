@@ -6,9 +6,7 @@ import com.company.dto.ApiResponse;
 import com.company.dto.CheckDTO;
 import com.company.entity.CashbackEntity;
 import com.company.entity.CheckEntity;
-import com.company.entity.MenuEntity;
-import com.company.enums.MenuStatus;
-import com.company.re.MenuRepository;
+import com.company.repository.MenuRepository;
 import com.company.repository.CashbackRepository;
 import com.company.repository.CheckRepository;
 import com.company.service.CheckService;
@@ -31,19 +29,19 @@ public class CheckServiceImpl implements CheckService {
     private MenuRepository menuRepository;
     @Autowired
     private ResourceBundleService resourceBundleService;
-    public CheckEntity toEntity(CheckDTO dto) {
+    private CheckEntity toEntity(CheckDTO dto) {
         CheckEntity entity = new CheckEntity();
         entity.setPrice(dto.getPrice());
         entity.setClientName(dto.getClientName());
         entity.setPhone(dto.getPhone());
         return entity;
     }
-    public CheckDTO toDTO(CheckEntity entity) {
+    private CheckDTO toDTO(CheckEntity entity) {
         CheckDTO dto = new CheckDTO();
         dto.setPrice(entity.getPrice());
         dto.setClientName(entity.getClientName());
         dto.setPhone(entity.getPhone());
-        dto.setMenuEntity(entity.getMenuEntity());
+//        dto.setMenuEntity(entity.getMenuEntity());
         return dto;
     }
 

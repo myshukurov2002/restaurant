@@ -43,29 +43,4 @@ public class JWTUtil {
             throw new UnAuthorizedException("Your session expired");
         }
     }
-
-//    public static String encodePhoneJwt(String profileId) { //TODO
-//        JwtBuilder jwtBuilder = Jwts.builder();
-//        jwtBuilder.setIssuedAt(new Date());
-//        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
-//
-//        jwtBuilder.claim("id", profileId);
-//
-//        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (roleTokenLiveTime)));
-//        jwtBuilder.setIssuer("restaurant PORTAL");
-//        return jwtBuilder.compact();
-//    }
-//
-//    public static JwtDTO decodeEmailJwt(String token) {
-//        try {
-//            JwtParser jwtParser = Jwts.parser();
-//            jwtParser.setSigningKey(secretKey);
-//            Jws<Claims> jws = jwtParser.parseClaimsJws(token);
-//            Claims claims = jws.getBody();
-//            String id = (String) claims.get("id");
-//            return new JwtDTO(id);
-//        } catch (JwtException e) {
-//            throw new UnAuthorizedException("Your session expired");
-//        }
-//    }
 }

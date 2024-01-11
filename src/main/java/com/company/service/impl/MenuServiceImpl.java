@@ -11,10 +11,9 @@ import com.company.entity.TableOrderEntity;
 import com.company.enums.MenuStatus;
 import com.company.enums.TableStatus;
 import com.company.exp.AppBadRequestException;
-import com.company.re.FoodRepository;
-import com.company.re.MenuRepository;
+import com.company.repository.FoodRepository;
+import com.company.repository.MenuRepository;
 import com.company.repository.TableOrderRepository;
-import com.company.service.CheckService;
 import com.company.service.MenuService;
 import com.company.service.OrderFoodRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +39,7 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private ResourceBundleService resourceBundleService;
 
-    public MenuDTO toDTO(MenuEntity entity) {
+    private MenuDTO toDTO(MenuEntity entity) {
         MenuDTO dto = new MenuDTO();
         dto.setMenuStatus(entity.getMenuStatus());
         dto.setTableOrderId(entity.getTableOrderId());
