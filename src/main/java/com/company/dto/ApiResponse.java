@@ -8,10 +8,10 @@ import lombok.Setter;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
-    private String message;
-    private Integer code;
-    private Boolean status;
-    private T data;
+    private String message; // Not found
+    private Integer code; // 400
+    private Boolean status; // false
+    private T data; // {}
 
     public ApiResponse(String message, Integer code, Boolean status) {
         this.message = message;

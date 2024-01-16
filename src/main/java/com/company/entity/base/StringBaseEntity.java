@@ -1,10 +1,13 @@
 package com.company.entity.base;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -22,5 +25,6 @@ public class StringBaseEntity {
     private Boolean visibility = Boolean.TRUE;
 
     @Column(name = "created_date")
+    @CreationTimestamp
     private LocalDateTime createdDate = LocalDateTime.now();
 }

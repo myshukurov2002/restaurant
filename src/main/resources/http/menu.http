@@ -34,7 +34,7 @@ Content-Type: application/json
 ###
 
 ### Update menu
-PUT localhost:8080/api/v1/menu/update/80d8b4ce-ea51-44d5-b0b1-e185ce013eea
+PUT localhost:8080/api/v1/menu/update/6838c95d-aa63-4a24-a575-7b8bc098b480
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsInJvbGVzIjpbIlNVUEVSX0FETUlOIiwiVVNFUiIsIlNUQUZGIiwiQ0hFRiIsIkFETUlOSVNUUkFUT1IiLCJBRE1JTklTVFJBVE9SIl0sImV4cCI6MTcwNTczNzMwMywiaXNzIjoicmVzdGF1cmFudCBQT1JUQUwifQ.pGZG3andb-eTs7IeBssl5T9H_dcZ2fy1WVOVN1EMzWldbaWuAcwb6IAIbUUTwoqJ0W-MsrptlAIgmXITUlsKkQ
 Content-Type: application/json
 

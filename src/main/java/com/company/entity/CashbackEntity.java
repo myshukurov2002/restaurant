@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name = "cashback")
 public class CashbackEntity extends StringBaseEntity {
 
-    @Column(name = "price", columnDefinition = "double default 0.0")
+    @Column(name = "price")
     private Double price = 0.0;
 
     @Column(name = "phone")

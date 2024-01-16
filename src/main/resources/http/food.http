@@ -17,7 +17,7 @@ Content-Type: application/json
 {
   "name": "Fenchuzi",
   "price": 100000,
-  "categoryId": 1
+  "categoryId": 2
 }
 
 ### Create food
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
   "name": "Napaleon",
-  "price": 100000,
+  "price": 20000,
   "categoryId": 1
 }
 
@@ -58,6 +58,10 @@ GET localhost:8080/api/v1/food/open/paging
 
 ###paging food by category id
 GET localhost:8080/api/v1/food/open/paging/by-categoryId/1
+
+
+###paging food by category id
+GET localhost:8080/api/v1/food/open/paging/by-categoryId/2
 
 
 

@@ -16,6 +16,7 @@ import com.company.repository.ProfileRoleRepository;
 import com.company.service.AuthService;
 import com.company.util.JWTUtil;
 import com.company.util.MD5Util;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,9 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    @Autowired
-    private ProfileRepository profileRepository;
+    private final ProfileRepository profileRepository;
     @Autowired
     private ProfileRoleRepository profileRoleRepository;
     @Autowired
@@ -118,6 +119,6 @@ public class AuthServiceImpl implements AuthService {
             profileRoleRepository.save(role);
         });
         log.warn("update profile role, id: " + id);
-        return new ApiResponse<>(true, resourceBundleService.getMessage("success.registration", Language.en));
+        return new ApiResponse<>(true, resourceBundleService.getMessage("success.updated", Language.en));
     }
 }

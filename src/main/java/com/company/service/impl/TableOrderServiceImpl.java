@@ -24,7 +24,6 @@ public class TableOrderServiceImpl implements TableOrderService {
     private ResourceBundleService resourceBundleService;
 
     private TableOrderEntity toEntity(TableOrderDTO dto) {
-
         TableOrderEntity entity = new TableOrderEntity();
         entity.setTableStatus(dto.getTableStatus());
         entity.setTableType(dto.getTableType());

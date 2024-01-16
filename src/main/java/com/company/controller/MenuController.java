@@ -20,7 +20,7 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @PostMapping("/create")
+    @PostMapping
     @Operation(summary = "create  ➕", description = "this api used for menu creation")
     @PreAuthorize("hasAnyRole('CHEF', 'WAITER', 'ADMINISTRATOR', 'SUPER_ADMIN')")
     public ResponseEntity<ApiResponse<?>> create(@RequestBody MenuDTO dto) {

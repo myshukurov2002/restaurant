@@ -15,22 +15,18 @@ import java.time.LocalDate;
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegistrationDTO {
-    @NotNull(message = "FIRST NAME SHOULD NOT BE NULL!!!")
     @NotBlank(message = "FIRST NAME SHOULD NOT BE BLANK!!!")
     private String firstName;
 
-    @NotNull(message = "SECOND NAME SHOULD NOT BE NULL!!!")
     @NotBlank(message = "SECOND NAME SHOULD NOT BE BLANK!!!")
     private String secondName;
 
-    @NotNull(message = "THIRD NAME SHOULD NOT BE NULL!!!")
     @NotBlank(message = "THIRD NAME SHOULD NOT BE BLANK!!!")
     private String thirdName; // father's name
 
-    @Email(message = "INVALID EMAIL FORMAT!!!")
+    @Email(message = "{email.not-valid}")
     private String email;
 
-    @NotNull(message = "PHONE SHOULD NOT BE NULL!!!")
     @NotBlank(message = "PHONE SHOULD NOT BE BLANK!!!")
     @Pattern(regexp = "\\+998[1-9][0-9]{9}", message = "INVALID PHONE FORMAT!!!")
     private String phone;

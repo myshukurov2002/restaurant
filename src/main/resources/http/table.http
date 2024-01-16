@@ -4,7 +4,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDQ4NzMzMDMsImlkIjoiMSIsI
 Content-Type: application/json
 
 {
-  "tableType": 4,
+  "tableType": 3,
   "tableStatus": "EMPTY"
 }
 

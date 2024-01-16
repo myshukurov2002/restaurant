@@ -23,7 +23,6 @@ public class CustomUserDetails implements UserDetails {
             list.add(new SimpleGrantedAuthority("ROLE_" + role.name()));
         }
         profileRoleList = list;
-
     }
 
     @Override

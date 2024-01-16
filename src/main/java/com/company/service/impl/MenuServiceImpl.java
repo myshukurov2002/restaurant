@@ -101,15 +101,15 @@ public class MenuServiceImpl implements MenuService {
         MenuEntity entity = optionalMenu.get();
         entity.setMenuStatus(dto.getMenuStatus());
 
-        if (dto.getMenuStatus().equals(MenuStatus.EATEN) ||
-            dto.getMenuStatus().equals(MenuStatus.CANCELED)) {
-            Optional<TableOrderEntity> optionalTable = tableOrderRepository
-                    .findById(entity.getTableOrderId());
+        switch (dto.getMenuStatus()){
+            case EATEN,CANCELED ->{
+                Optional<TableOrderEntity> optionalTable = tableOrderRepository
+                        .findById(entity.getTableOrderId());
 
-            TableOrderEntity tableOrder = optionalTable.get();
-            tableOrder.setTableStatus(TableStatus.EMPTY);
-            tableOrderRepository.save(tableOrder);
-
+                TableOrderEntity tableOrder = optionalTable.get();
+                tableOrder.setTableStatus(TableStatus.EMPTY);
+                tableOrderRepository.save(tableOrder);
+            }
         }
 
         log.warn("menu updated " + id);

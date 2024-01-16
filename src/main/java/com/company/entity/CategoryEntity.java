@@ -16,7 +16,7 @@ public class CategoryEntity extends IntegerBaseEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "categoryEntity")
+    @OneToMany(mappedBy = "categoryEntity", fetch = FetchType.LAZY)
     private List<FoodEntity> foodEntities;
 
     @ManyToOne
